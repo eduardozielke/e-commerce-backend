@@ -26,7 +26,7 @@ class Order : BaseEntity() {
     var orderItems: List<OrderItem>? = null
 
     @Column(name = "total", nullable = false)
-    var totalAmount: BigDecimal? = null
+    var total: Long? = null
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

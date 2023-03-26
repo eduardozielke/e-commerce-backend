@@ -11,6 +11,6 @@ class OrderDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     var encryptedId: String? = null
     var orderItems: List<OrderItemDTO>? = null
-    var totalAmount: BigDecimal? = null
+    var total: Long? = null
     var status: OrderStatus? = null
 }

@@ -31,29 +31,14 @@ class User : BaseEntity() {
     @Column(name = "password")
     var password: String? = null
 
-    @Column(name = "address")
-    var address: String? = null
-
-    @Column(name = "city")
-    var city: String? = null
-
-    @Column(name = "state")
-    var state: String? = null
-
-    @Column(name = "zip_code")
-    var zipCode: String? = null
-
-    @Column(name = "country")
-    var country: String? = null
-
     @Column(name = "telephone")
     var telephone: String? = null
 
-    @OneToMany(mappedBy = "user")
-    var creditCard: List<CreditCard>? = null
-
     @Column(name = "is_active")
     var isActive: Boolean? = null
+
+    @OneToMany(mappedBy = "user")
+    var creditCard: List<CreditCard>? = null
 
     @PostLoad
     @PostPersist

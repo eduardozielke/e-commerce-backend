@@ -24,6 +24,9 @@ class Cart : BaseEntity() {
     @OneToMany(mappedBy = "cart")
     val items: List<CartItem> = emptyList()
 
+    @Column(name = "total")
+    val total: Long? = null
+
     @PostLoad
     @PostPersist
     private fun onGetFromDB() {

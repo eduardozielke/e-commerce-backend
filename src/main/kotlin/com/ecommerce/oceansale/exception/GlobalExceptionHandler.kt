@@ -22,7 +22,7 @@ class GlobalExceptionHandler {
     fun handleException(ex: Exception, req: WebRequest): ResponseEntity<ErrorResponse?>? {
 
         val path = (req as ServletWebRequest).request.requestURL.toString()
-        logger.error(ex.message, ex.printStackTrace())
+//        LOGGER.error(ex.message, ex.printStackTrace())
 
         val errorResponse = when(ex) {
             is EntityNotFoundException -> {
@@ -52,6 +52,7 @@ class GlobalExceptionHandler {
 //            }
 
             else -> {
+                logger.error(ex.message, ex.printStackTrace())
                 ErrorResponse(
                     ex.message!!,
                     HttpStatus.INTERNAL_SERVER_ERROR.value(),

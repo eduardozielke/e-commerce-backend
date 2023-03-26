@@ -11,5 +11,5 @@ class CreditCardDTO{
     var creditCardNumber: String? = null
 
     @NotBlank(message = "Credit card expiration date is required.")
-    var creditCardExpirationDate: String? = null
+    var expirationDate: String? = null
 }

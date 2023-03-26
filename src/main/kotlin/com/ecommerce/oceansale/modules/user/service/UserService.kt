@@ -23,7 +23,7 @@ class UserService(val repository: UserRepository) {
 
     fun findById(encryptedId: String): UserDTO {
         val id = IdEncryptor.decrypt(encryptedId)
-        val found = repository.findById(id).orElseThrow { EntityNotFoundException("user id $id not found") }
+        val found = repository.findById(id).orElseThrow { EntityNotFoundException("user id $encryptedId not found") }
         return UserMapper.INSTANCE.toDto(found)
     }
 

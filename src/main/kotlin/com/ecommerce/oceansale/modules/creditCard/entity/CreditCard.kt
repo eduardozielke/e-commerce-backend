@@ -17,11 +17,11 @@ class CreditCard : BaseEntity(){
     @Column(name = "id")
     override var id: Long? = null
 
-    @Column(name = "credit_card_number")
+    @Column(name = "number")
     var creditCardNumber: String? = null
 
-    @Column(name = "credit_card_expiration_date")
-    var creditCardExpirationDate: String? = null
+    @Column(name = "expiration_date")
+    var expirationDate: String? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

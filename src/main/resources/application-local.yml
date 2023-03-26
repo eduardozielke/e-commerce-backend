@@ -23,12 +23,12 @@ swagger:
   origin:
     root: 'root'
 security:
-  creditCardKey: 'minha-chave-dos-cartoes'
-  idsKey: "minha chave para criptografar os ids"
-elastic:
-  apm:
-    service_name: my-application
-    server_urls: http://localhost:8200
+  credit-card-key: 'minha-chave-dos-cartoes'
+  id-key: "minha chave para criptografar os ids"
+#elastic:
+#  apm:
+#    service_name: my-application
+#    server_urls: http://localhost:8200
 server:
   url: 'localhost'
   error:

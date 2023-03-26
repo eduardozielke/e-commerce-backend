@@ -1,18 +1,13 @@
 CREATE SEQUENCE IF NOT EXISTS users_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE users
 (
-    id         BIGINT NOT NULL DEFAULT NOT NULL default nextval('users_seq'),
+    id         BIGINT NOT NULL DEFAULT nextval('users_seq'),
     created_at TIMESTAMP WITH TIME ZONE,
     updated_at TIMESTAMP WITH TIME ZONE,
     first_name VARCHAR(255),
     last_name  VARCHAR(255),
     email      VARCHAR(255) UNIQUE,
     password   VARCHAR(255),
-    address    VARCHAR(255),
-    city       VARCHAR(255),
-    state      VARCHAR(255),
-    zip_code   VARCHAR(255),
-    country    VARCHAR(255),
     telephone  VARCHAR(255),
     is_active  BOOLEAN         DEFAULT TRUE,
     CONSTRAINT pk_users PRIMARY KEY (id)
@@ -21,11 +16,12 @@ CREATE TABLE users
 CREATE SEQUENCE IF NOT EXISTS credit_cards_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE credit_cards
 (
-    id                          BIGINT NOT NULL default nextval('credit_cards_seq'),
-    created_at                  TIMESTAMP WITH TIME ZONE,
-    updated_at                  TIMESTAMP WITH TIME ZONE,
-    credit_card_number          VARCHAR(255),
-    credit_card_expiration_date VARCHAR(255),
+    id              BIGINT NOT NULL default nextval('credit_cards_seq'),
+    created_at      TIMESTAMP WITH TIME ZONE,
+    updated_at      TIMESTAMP WITH TIME ZONE,
+    user_id         BIGINT NOT NULL,
+    number          VARCHAR(255),
+    expiration_date VARCHAR(255),
     CONSTRAINT pk_credit_cards PRIMARY KEY (id)
 );
 
@@ -50,7 +46,6 @@ CREATE TABLE products
     image       VARCHAR,
     quantity    BIGINT                   NOT NULL,
     category_id BIGINT                   NOT NULL,
-    user_id     BIGINT                   NOT NULL,
     created_at  TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at  TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT pk_products PRIMARY KEY (id)
@@ -74,6 +69,7 @@ CREATE TABLE carts
 (
     id         BIGINT                   NOT NULL default nextval('carts_seq'),
     user_id    BIGINT                   NOT NULL,
+    total      BIGINT,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT pk_carts PRIMARY KEY (id)
@@ -98,6 +94,7 @@ CREATE TABLE orders
     user_id      BIGINT                   NOT NULL,
     total_amount DECIMAL                  NOT NULL,
     status       VARCHAR(255)             NOT NULL,
+    total        BIGINT                   NOT NULL,
     created_at   TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at   TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT pk_orders PRIMARY KEY (id)
@@ -132,4 +129,21 @@ CREATE TABLE IF NOT EXISTS category_product
 (
     category_id BIGINT NOT NULL,
     product_id  BIGINT NOT NULL
+);
+
+CREATE SEQUENCE IF NOT EXISTS adresses_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE IF NOT EXISTS adresses
+(
+    id             BIGINT NOT NULL default nextval('adresses_seq'),
+    created_at     TIMESTAMP WITHOUT TIME ZONE,
+    updated_at     TIMESTAMP WITHOUT TIME ZONE,
+    address_line_1 VARCHAR(255),
+    address_line_2 VARCHAR(255),
+    city           VARCHAR(255),
+    state          VARCHAR(255),
+    zip_code       VARCHAR(255),
+    country        VARCHAR(255),
+    telephone      VARCHAR(255),
+    user_id        BIGINT,
+    CONSTRAINT pk_adresses PRIMARY KEY (id)
 );

@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service
 @Service
 class CreditCardService(val repository: CreditCardRepository) {
 
-    @Value("\${security.creditCardKey}")
+    @Value("\${security.credit-card-key}")
     private lateinit var creditCardKey: String
 
     fun findAll(): List<CreditCardDTO> {
         val allFound = repository.findAll()
         return CreditCardMapper.INSTANCE.toDto(allFound).map { creditCardDTO ->
             creditCardDTO.creditCardNumber = Encryption.decrypt(creditCardDTO.creditCardNumber!!, creditCardKey)
-            creditCardDTO.creditCardExpirationDate = Encryption.decrypt(creditCardDTO.creditCardExpirationDate!!, creditCardKey)
+            creditCardDTO.expirationDate = Encryption.decrypt(creditCardDTO.expirationDate!!, creditCardKey)
             creditCardDTO
         }
     }
@@ -27,7 +27,7 @@ class CreditCardService(val repository: CreditCardRepository) {
     fun save(body: CreditCardDTO): CreditCardDTO {
         val toSave = CreditCardMapper.INSTANCE.toEntity(body)
         toSave.creditCardNumber?.let { toSave.creditCardNumber = Encryption.encrypt(it, creditCardKey) }
-        toSave.creditCardExpirationDate?.let { toSave.creditCardExpirationDate = Encryption.encrypt(it, creditCardKey) }
+        toSave.expirationDate?.let { toSave.expirationDate = Encryption.encrypt(it, creditCardKey) }
         val saved = repository.save(toSave)
         return CreditCardMapper.INSTANCE.toDto(saved)
     }
@@ -36,7 +36,7 @@ class CreditCardService(val repository: CreditCardRepository) {
         val id = IdEncryptor.decrypt(encryptedId)
         val found = repository.findById(id).orElseThrow { EntityNotFoundException("Credit card id $id not found") }
         found.creditCardNumber?.let { found.creditCardNumber = Encryption.decrypt(it, creditCardKey) }
-        found.creditCardExpirationDate?.let { found.creditCardExpirationDate = Encryption.decrypt(it, creditCardKey) }
+        found.expirationDate?.let { found.expirationDate = Encryption.decrypt(it, creditCardKey) }
         return CreditCardMapper.INSTANCE.toDto(found)
     }
 }

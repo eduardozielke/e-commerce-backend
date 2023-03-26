@@ -19,11 +19,6 @@ class UserDTO {
     var email: String? = null
     var firstName: String? = null
     var lastName: String? = null
-    var address: String? = null
-    var city: String? = null
-    var state: String? = null
-    var zipCode: String? = null
-    var country: String? = null
     var telephone: String? = null
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     var isActive = true

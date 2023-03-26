@@ -8,5 +8,6 @@ class CartDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     var encryptedId: String? = null
+    val total: Long? = null
      var items: List<CartItemDTO> = emptyList()
 }

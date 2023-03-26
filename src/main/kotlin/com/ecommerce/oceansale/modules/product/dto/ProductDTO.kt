@@ -13,7 +13,7 @@ class ProductDTO {
     var image: String? = null
     var quantity: Long? = null
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    var categoryId: List<Long>? = null
+    var categoryId: List<String>? = null
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     var createdAt: LocalDateTime? = null
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
