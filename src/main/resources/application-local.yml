@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    password: master
+    username: oceansale
+    url: jdbc:postgresql://localhost:9999/oceansale
+    driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  flyway:
+    schemas: public
+    outOfOrder: true
+    locations: 'classpath:db/migrations,filesystem:src/main/resources/db/migrations'
+swagger:
+  description: 'Back do ecommerce oceansale'
+  contact:
+    name: 'Eduardo Zielke'
+    url: 'instagram.com/eduardozielke'
+    email: 'zielkeeduardo@gmail.com'
+  origin:
+    root: 'root'
+security:
+  creditCardKey: 'minha-chave-dos-cartoes'
+  idsKey: "minha chave para criptografar os ids"
+elastic:
+  apm:
+    service_name: my-application
+    server_urls: http://localhost:8200
+server:
+  url: 'localhost'
+  error:
+    include-stacktrace: on_param
+  servlet:
+    context-path: /oceansale
+  port: '8899'

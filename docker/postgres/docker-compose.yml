@@ -1,0 +1,12 @@
+version: "3"
+services:
+  oceansale_db:
+    image: postgres:15
+    container_name: oceansale-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=oceansale
+      - POSTGRES_USER=oceansale
+      - POSTGRES_PASSWORD=master
+    ports:
+      - "9999:5432"
